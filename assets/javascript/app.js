@@ -5,10 +5,22 @@ var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 
 var gameArr = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splatoon", "Bayonetta"];
 
-$("#input-bar").on("click", function(event) {
+var term = gameArr[0];
+
+function tagDisplay() {
+    $(".tags").empty();
+    for (var i = 0; i < gameArr.length; i++) {
+        var tag = $("<p>").attr("data-name", gameArr[i]).text(gameArr[i]);
+        $(".tags").append(tag);
+    }
+}
+tagDisplay();
+
+$(".search").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
-    term = $("#input-bar").val();
+    //get input word
+    //term = $("#input-bar").val();
 
     //making ajax call to get data
     $.ajax({

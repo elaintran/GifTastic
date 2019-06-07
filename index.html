@@ -13,6 +13,7 @@
 	<!--jQuery-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!--CSS-->
+	<link rel="style-sheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
@@ -22,20 +23,14 @@
 	<div class="side-bar">
 		<h3 class="title">getgiphy</h3>
 		<div class="tags">
-			<p>Fire Emblem</p>
-			<p>Animal Crossing</p>
-			<p>Super Mario</p>
-			<p>Pokemon</p>
-			<p>Splatoon</p>
-			<p>Bayonetta</p>
 		</div>
 	</div>
 
 	<div class="gif-content">
-		<div class="search-bar">
+		<form class="search-bar">
 			<input type="text" class="input-bar">
-			<div class="search">search</div>
-		</div>
+			<input type="submit" class="search" value="search">
+		</form>
 		<div class="gif-area"></div>
 	</div>
 </div>
