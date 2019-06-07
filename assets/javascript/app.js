@@ -18,13 +18,16 @@ $(".search").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
-    term = $("#input-bar").val();
-
+    term = $(".input-bar").val();
+    //push search term into array
+    gameArr.push(term);
     //making ajax call to get data
     $.ajax({
         url: giphy + search + term + limit + key,
         method: "GET"
     }).then(function(response) {
         console.log(response);
+        //var newGameTag = $("<div>").
     })
+    tagDisplay();
 })
