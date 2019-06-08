@@ -8,15 +8,20 @@ var topics = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splat
 function tagDisplay() {
     $(".tags").empty();
     for (var i = 0; i < topics.length; i++) {
+        var buttonContainer = $("<div>").addClass("gif-tags");
         var tag = $("<p>").addClass("gif-button").attr("data-name", topics[i]).text(topics[i]);
-        $(".tags").append(tag);
+        buttonContainer.append(tag);
+        $(".tags").append(buttonContainer);
     }
 }
 tagDisplay();
 
 function gifButton() {
     var button = $(this).attr("data-name");
+    $(this).addClass("active");
     ajaxCall(button);
+    var rightArrow = $("<div>").addClass("selector");
+    $(this).parent().append(rightArrow);
 }
 
 $(".search").on("click", function(event) {

@@ -10,8 +10,8 @@ h3 {
 }
 
 p {
-	margin: 13px 0;
-    font-size: 18px;
+	margin: 16px 0;
+    font-size: 13px;
 }
 
 .main-container {
@@ -22,24 +22,53 @@ p {
 .side-bar {
 	position: fixed;
 	width: 200px;
-	background-color: black;
+	background-color: #191919;
 	height: 100vh;
 	color: white;
-	text-align: center;
 }
 
-.tags p {
-	font-style: italic;
+.tags {
+	/* margin: 0 35px; */
 }
 
-.tags p:hover {
+.gif-tags{
+	position: relative;
+}
+
+.gif-button {
+	text-transform: uppercase;
+	font-size: 13px;
+	letter-spacing: 0.5px;
+	color: #d4d4d4;
+	margin-right: 35px;
+	margin-left: 35px;
+}
+
+.gif-button:hover {
 	cursor: pointer;
+	color: white;
 }
+
+.active {
+	color: white;
+}
+
+.selector {
+    width: 0;
+    height: 0;
+    top: 0px;
+    left: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 11px solid white;
+	position: absolute;
+}
+
 
 .title {
 	margin: 45px 0;
 	font-weight: 700;
-	font-style: italic;
+	text-align: center;
 }
 
 .gif-content {
@@ -61,6 +90,7 @@ p {
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
 	box-sizing: border-box;
+	background-color: #f4f4f4;
 }
 
 .input-bar:focus, .search:focus, .search:active {
@@ -101,4 +131,10 @@ p {
 	height: 250px;
 	width: 100%;
 	object-fit: cover;
+}
+
+@media screen and (max-width: 1050px) {
+	.gif {
+		width: calc(50% - 40px);
+	}
 }
