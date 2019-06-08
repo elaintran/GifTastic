@@ -40,8 +40,7 @@ p {
 	font-size: 13px;
 	letter-spacing: 0.5px;
 	color: #d4d4d4;
-	margin-right: 35px;
-	margin-left: 35px;
+	padding-left: 40px;
 }
 
 .gif-button:hover {
@@ -73,7 +72,7 @@ p {
 
 .gif-content {
 	width: 100%;
-	margin: 45px 0 45px 200px;
+	margin: 34px 0 45px 200px;
 }
 
 .search-bar {
@@ -115,7 +114,7 @@ p {
 .gif-area {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 50px;
+	margin: 34px 50px;
 }
 
 .gif {

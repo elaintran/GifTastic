@@ -17,11 +17,17 @@ function tagDisplay() {
 tagDisplay();
 
 function gifButton() {
+    //give gif buttons a data-name
     var button = $(this).attr("data-name");
+    //clear active classes when clicking on a new button
+    $("div").removeClass("active");
+    $("div").removeClass("selector");
+    //add active classes
     $(this).addClass("active");
-    ajaxCall(button);
     var rightArrow = $("<div>").addClass("selector");
     $(this).parent().append(rightArrow);
+    //call ajax for when button is clicked
+    ajaxCall(button);
 }
 
 $(".search").on("click", function(event) {
