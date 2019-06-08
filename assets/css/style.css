@@ -20,7 +20,7 @@ p {
 }
 
 .side-bar {
-	position: absolute;
+	position: fixed;
 	width: 200px;
 	background-color: black;
 	height: 100vh;
@@ -51,7 +51,11 @@ p {
     padding: 10px 20px;
     font-family: "Open Sans", sans-serif;
     font-weight: 700;
-    box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.input-bar:focus, .search:focus, .search:active {
+	outline: none;
 }
 
 .search {
@@ -67,4 +71,21 @@ p {
 .search:hover {
 	cursor: pointer;
 	opacity: 0.9;
+}
+
+.gif-area {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 20px 50px;
+}
+
+.gif {
+    width: calc(33.333% - 20px);
+    margin: 10px;
+}
+
+.gif img {
+	height: 250px;
+	width: 100%;
+	object-fit: cover;
 }
