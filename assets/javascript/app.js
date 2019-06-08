@@ -24,15 +24,19 @@ function onLoadDisplay() {
 onLoadDisplay();
 
 function gifButton() {
-    //give gif buttons a data-name
+    //get data-name for query url
     var button = $(this).attr("data-name");
-    //clear active classes when clicking on a new button
-    $("p").removeClass("active");
-    $(".selector").remove();
-    //add active classes
+    //clear previous active classes when clicking on a new button
+    tagClear();
+    //add new active classes
     tagActive(this);
     //call ajax for when button is clicked
     ajaxCall(button);
+}
+
+function tagClear() {
+    $("p").removeClass("active");
+    $(".selector").remove();
 }
 
 function tagActive(element) {
@@ -85,4 +89,11 @@ function ajaxCall(input) {
     })
 }
 
+//display gifs with tags are clicked
 $(".tags").on("click", ".gif-button", gifButton);
+
+//clear gifs
+$(".restart").on("click", function() {
+    $(".gif-area").empty();
+    tagClear();
+})
