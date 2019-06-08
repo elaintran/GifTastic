@@ -106,10 +106,14 @@ p {
 	outline: none;
 }
 
+.submit {
+	display: none;
+}
+
 .gif-area {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 34px 50px;
+	margin: 23px 50px 35px;
 }
 
 .gif {

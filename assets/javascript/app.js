@@ -3,7 +3,7 @@ var search = "search?q=";
 var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 
-var topics = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splatoon", "Bayonetta"];
+var topics = ["Fire Emblem", "Animal Crossing", "Paper Mario", "Pokemon", "Splatoon", "Bayonetta"];
 
 function tagDisplay() {
     $(".tags").empty();
@@ -30,7 +30,7 @@ function gifButton() {
     ajaxCall(button);
 }
 
-$(".search").on("click", function(event) {
+$(".submit").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
