@@ -61,7 +61,7 @@ p {
 }
 
 .title {
-	margin: 33px 0 36px;
+	margin: 33px 0 39px;
 	font-weight: 700;
 	text-align: center;
 }
@@ -124,14 +124,24 @@ p {
     margin: 10px;
     padding: 10px;
     background-color: white;
-    box-shadow: 3px 3px 9px rgba(141,141,141,0.1);
+	box-shadow: 3px 3px 9px rgba(141,141,141,0.1);
+	position: relative;
 }
-
 
 .gif img {
 	height: 250px;
 	width: 100%;
 	object-fit: cover;
+}
+
+.rating {
+	position: absolute;
+	text-transform: uppercase;
+    top: 16px;
+    right: 15px;
+    font-size: 11px;
+    padding: 5px 8px;
+    background-color: rgba(255,255,255,0.9);
 }
 
 @media screen and (max-width: 1050px) {

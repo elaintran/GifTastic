@@ -70,8 +70,11 @@ function ajaxCall(input) {
     }).then(function(response) {
         console.log(response);
         for (var i = 0; i < response.data.length; i++) {
-            var newGameTag = $("<div>").addClass("gif").append("<img src='" + response.data[i].images.fixed_height.url + "'>");
-            $(".gif-area").append(newGameTag);
+            var newGif = $("<div>").addClass("gif");
+            var gifImage = $("<img/>").attr("src", response.data[i].images.fixed_height.url);
+            var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
+            newGif.append(gifImage).append(rating);
+            $(".gif-area").append(newGif);
         }
     })
 }
