@@ -34,7 +34,10 @@ p {
 	font-size: 13px;
 	letter-spacing: 0.5px;
 	color: #b1b1b1;
-	padding-left: 40px;
+	padding: 0 25px 0 40px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .gif-button:hover {
