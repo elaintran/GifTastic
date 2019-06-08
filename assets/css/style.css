@@ -1,7 +1,6 @@
 html, body {
 	font-family: "Open Sans", sans-serif;
 	font-weight: 700;
-	text-transform: lowercase;
 	background-color: #f4f4f4;
 }
 
@@ -16,7 +15,6 @@ p {
 
 .main-container {
 	width: 100%;
-	display: flex;
 }
 
 .side-bar {
@@ -27,10 +25,6 @@ p {
 	color: white;
 }
 
-.tags {
-	/* margin: 0 35px; */
-}
-
 .gif-tags{
 	position: relative;
 }
@@ -39,7 +33,7 @@ p {
 	text-transform: uppercase;
 	font-size: 13px;
 	letter-spacing: 0.5px;
-	color: #d4d4d4;
+	color: #b1b1b1;
 	padding-left: 40px;
 }
 
@@ -63,52 +57,53 @@ p {
 	position: absolute;
 }
 
-
 .title {
-	margin: 45px 0;
+	margin: 33px 0 36px;
 	font-weight: 700;
 	text-align: center;
 }
 
-.gif-content {
-	width: 100%;
-	margin: 34px 0 45px 200px;
+.restart {
+	position: absolute;
+	/* background-color: #f2cb5f; */
+	bottom: 26px;
+	right: 0;
+	left: 0;
+	text-align: center;
 }
 
-.search-bar {
-	display: flex;
+.gif-content {
+	width: calc(100% - 200px);
+	float: right;
+	margin-top: 25px;
+}
+
+.search-container {
+	margin-left: 60px;
+	width: 570px;
+    padding: 10px 25px;
+    border-radius: 23px;
+    background-color: #e5e5e5;
+}
+
+.search-container i {
+	color: #888888;
+    font-size: 12px;
+    margin-right: 11px;
 }
 
 .input-bar {
-    margin-left: 60px;
-    border: 3px solid black;
-    height: 47px;
-    width: 50%;
-    font-size: 15px;
-    padding: 10px 20px;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 700;
-	box-sizing: border-box;
-	background-color: #f4f4f4;
+    background-color: #e5e5e5;
+    border: 0;
+    font-weight: 600;
+    height: 24px;
+    letter-spacing: 0.2px;
+	width: 95%;
+	color: #191919;
 }
 
-.input-bar:focus, .search:focus, .search:active {
+.input-bar:focus, .input-bar:active {
 	outline: none;
-}
-
-.search {
-	background-color: black;
-	padding: 5px 20px;
-	color: white;
-	border: 0;
-	font-size: 16px;
-	font-style: italic;
-	font-weight: 600;
-}
-
-.search:hover {
-	cursor: pointer;
-	opacity: 0.9;
 }
 
 .gif-area {
