@@ -3,7 +3,7 @@ var search = "search?q=";
 var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 
-var topics = ["Fire Emblem", "Animal Crossing", "Paper Mario", "Pokemon", "Splatoon", "Bayonetta"];
+var topics = ["fire emblem", "animal crossing", "paper mario", "pokemon", "splatoon", "bayonetta"];
 
 function tagDisplay() {
     $(".tags").empty();
@@ -45,14 +45,18 @@ $(".submit").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
-    term = $(".input-bar").val();
+    term = $(".input-bar").val().toLowerCase();
+    var tagSelector = "p[data-name='" + term + "']";
     //clear input
     $(".input-bar").val("");
     //push search term into array
-    topics.push(term);
-    ajaxCall(term);
+    if (topics.indexOf(term) === -1) {
+        topics.push(term);
+    }
     //display new tag
     tagDisplay();
+    tagActive(tagSelector);
+    ajaxCall(term);
 })
 
 function ajaxCall(input) {
