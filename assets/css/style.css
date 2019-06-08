@@ -22,12 +22,18 @@ a {
 	width: 100%;
 }
 
-.side-bar {
+.sidebar {
 	position: fixed;
 	width: 200px;
 	background-color: #191919;
 	height: 100vh;
 	color: white;
+}
+
+.title {
+	margin: 35px 0 39px;
+	font-weight: 700;
+	text-align: center;
 }
 
 .tags {
@@ -77,29 +83,17 @@ a {
 	position: absolute;
 }
 
-.title {
-	margin: 35px 0 39px;
-	font-weight: 700;
-	text-align: center;
-}
-
-.restart {
-	position: absolute;
-	/* background-color: #f2cb5f; */
-	bottom: 26px;
-	right: 0;
-	left: 0;
-	text-align: center;
-}
-
 .gif-content {
 	width: calc(100% - 200px);
 	float: right;
 	margin-top: 25px;
 }
 
+.search-bar {
+	margin: 0 60px;
+}
+
 .search-container {
-	margin-left: 60px;
 	width: 570px;
     padding: 10px 25px;
     border-radius: 23px;
@@ -146,7 +140,7 @@ a {
 }
 
 .gif-image {
-	height: 250px;
+	height: 100%;
 	width: 100%;
 	object-fit: cover;
 }
@@ -192,5 +186,49 @@ a {
 @media screen and (max-width: 1050px) {
 	.gif {
 		width: calc(50% - 40px);
+	}
+}
+
+@media screen and (max-width: 957px) {
+	.search-container {
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.input-bar {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 785px) {
+	.gif {
+		width: calc(100% - 40px);
+		min-height: 250px;
+		max-height: 300px;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.sidebar {
+		width: 100%;
+		height: auto;
+		position: static;
+		padding: 26px 0;
+	}
+	.title {
+	    margin: 0;
+		margin-left: 45px;
+		text-align: left;
+	}
+	.tags {
+		display: none;
+	}
+	.gif-content {
+		width: 100%;
+	}
+	.search-bar {
+		margin: 0 40px;
+	}
+	.gif-area {
+		margin: 23px 35px 35px;
 	}
 }
