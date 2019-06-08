@@ -16,18 +16,29 @@ function tagDisplay() {
 }
 tagDisplay();
 
+function onLoadDisplay() {
+    var activeElement = $("p[data-name='" + topics[1] + "']");
+    tagActive(activeElement);
+    ajaxCall(topics[1]);
+}
+onLoadDisplay();
+
 function gifButton() {
     //give gif buttons a data-name
     var button = $(this).attr("data-name");
     //clear active classes when clicking on a new button
     $("p").removeClass("active");
-    $("div").removeClass("selector");
+    $(".selector").remove();
     //add active classes
-    $(this).addClass("active");
-    var rightArrow = $("<div>").addClass("selector");
-    $(this).parent().append(rightArrow);
+    tagActive(this);
     //call ajax for when button is clicked
     ajaxCall(button);
+}
+
+function tagActive(element) {
+    var rightArrow = $("<div>").addClass("selector");
+    $(element).addClass("active");
+    $(element).parent().append(rightArrow);
 }
 
 $(".submit").on("click", function(event) {
@@ -47,9 +58,10 @@ $(".submit").on("click", function(event) {
 function ajaxCall(input) {
     //clear gifs
     $(".gif-area").empty();
+    var queryURL = giphy + search + input + limit + key;
     //making ajax call to get data
     $.ajax({
-        url: giphy + search + input + limit + key,
+        url: queryURL,
         method: "GET"
     }).then(function(response) {
         console.log(response);
