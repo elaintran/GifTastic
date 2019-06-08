@@ -28,6 +28,10 @@ p {
 	text-align: center;
 }
 
+.tags p:hover {
+	cursor: pointer;
+}
+
 .title {
 	margin: 45px 0;
 	font-weight: 700;

@@ -1,6 +1,6 @@
 var giphy = "https://api.giphy.com/v1/gifs/";
 var search = "search?q=";
-var limit = "&limit=10";
+var limit = "&limit=9";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 
 var topics = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splatoon", "Bayonetta"];
@@ -8,23 +8,37 @@ var topics = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splat
 function tagDisplay() {
     $(".tags").empty();
     for (var i = 0; i < topics.length; i++) {
-        var tag = $("<p>").attr("data-name", topics[i]).text(topics[i]);
+        var tag = $("<p>").addClass("gif-button").attr("data-name", topics[i]).text(topics[i]);
         $(".tags").append(tag);
     }
 }
 tagDisplay();
+
+function gifButton() {
+    var button = $(this).attr("data-name");
+    ajaxCall(button);
+}
 
 $(".search").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
     term = $(".input-bar").val();
+    //clear input
     $(".input-bar").val("");
     //push search term into array
     topics.push(term);
+    ajaxCall(term);
+    //display new tag
+    tagDisplay();
+})
+
+function ajaxCall(input) {
+    //clear gifs
+    $(".gif-area").empty();
     //making ajax call to get data
     $.ajax({
-        url: giphy + search + term + limit + key,
+        url: giphy + search + input + limit + key,
         method: "GET"
     }).then(function(response) {
         console.log(response);
@@ -33,5 +47,6 @@ $(".search").on("click", function(event) {
             $(".gif-area").append(newGameTag);
         }
     })
-    tagDisplay();
-})
+}
+
+$(".tags").on("click", ".gif-button", gifButton);
