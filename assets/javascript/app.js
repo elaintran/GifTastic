@@ -1,6 +1,6 @@
 var giphy = "https://api.giphy.com/v1/gifs/";
 var search = "search?q=";
-var limit = "&limit=9";
+var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 
 var topics = ["Fire Emblem", "Animal Crossing", "Super Mario", "Pokemon", "Splatoon", "Bayonetta"];
