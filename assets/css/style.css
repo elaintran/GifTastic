@@ -128,7 +128,7 @@ p {
 	position: relative;
 }
 
-.gif img {
+.gif-image {
 	height: 250px;
 	width: 100%;
 	object-fit: cover;

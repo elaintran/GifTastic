@@ -81,7 +81,13 @@ function ajaxCall(input) {
         console.log(response);
         for (var i = 0; i < response.data.length; i++) {
             var newGif = $("<div>").addClass("gif");
-            var gifImage = $("<img/>").attr("src", response.data[i].images.fixed_height.url);
+            var gifImage = $("<img/>");
+            gifImage.addClass("gif-image").attr({
+                "src": response.data[i].images.fixed_height_still.url,
+                "data-animate": response.data[i].images.fixed_height.url,
+                "data-still": response.data[i].images.fixed_height_still.url,
+                "data-state": "still"
+            });
             var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
             newGif.append(gifImage).append(rating);
             $(".gif-area").append(newGif);
@@ -91,6 +97,20 @@ function ajaxCall(input) {
 
 //display gifs with tags are clicked
 $(".tags").on("click", ".gif-button", gifButton);
+
+$(".gif-area").on("click", ".gif-image", function() {
+    if ($(this).attr("data-state") === "still") {
+        $(this).attr({
+            "src": $(this).attr("data-animate"),
+            "data-state": "animate"
+        });
+    } else {
+        $(this).attr({
+            "src": $(this).attr("data-still"),
+            "data-state": "still"
+        });
+    }
+})
 
 //clear gifs
 $(".restart").on("click", function() {
