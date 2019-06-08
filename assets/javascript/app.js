@@ -46,17 +46,23 @@ $(".submit").on("click", function(event) {
     event.preventDefault();
     //get input word
     term = $(".input-bar").val().toLowerCase();
-    var tagSelector = "p[data-name='" + term + "']";
     //clear input
     $(".input-bar").val("");
-    //push search term into array
-    if (topics.indexOf(term) === -1) {
-        topics.push(term);
+    //select new tag
+    var tagSelector = "p[data-name='" + term + "']";
+    //if input is not empty
+    if (term !== "") {
+        //push search term into array if not in array already
+        if (topics.indexOf(term) === -1) {
+            topics.push(term);
+        }
+        //display new tag
+        tagDisplay();
+        //put active class on new tag
+        tagActive(tagSelector);
+        //display new gifs
+        ajaxCall(term);
     }
-    //display new tag
-    tagDisplay();
-    tagActive(tagSelector);
-    ajaxCall(term);
 })
 
 function ajaxCall(input) {
