@@ -50,8 +50,6 @@ p {
 }
 
 .selector {
-    width: 0;
-    height: 0;
     top: 0px;
     left: 0;
     border-top: 7px solid transparent;
@@ -132,6 +130,34 @@ p {
 	height: 250px;
 	width: 100%;
 	object-fit: cover;
+}
+
+.gif:hover {
+	cursor: pointer;
+}
+
+.icon-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+}
+
+.play-container {
+    padding: 16px 13px;
+    background-color: #ffffffb0;
+    border-radius: 50px;
+}
+
+.play-icon {
+	border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 18px solid black;
+    margin-left: 7px;
 }
 
 .rating {

@@ -89,7 +89,12 @@ function ajaxCall(input) {
                 "data-state": "still"
             });
             var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
-            newGif.append(gifImage).append(rating);
+            var iconCenter = $("<div>").addClass("icon-center");
+            var playContainer = $("<div>").addClass("play-container");
+            var playIcon = $("<div>").addClass("play-icon");
+            playContainer.append(playIcon);
+            iconCenter.append(playContainer);
+            newGif.append(gifImage).append(rating).append(iconCenter);
             $(".gif-area").append(newGif);
         }
     })
@@ -98,15 +103,26 @@ function ajaxCall(input) {
 //display gifs with tags are clicked
 $(".tags").on("click", ".gif-button", gifButton);
 
-$(".gif-area").on("click", ".gif-image", function() {
-    if ($(this).attr("data-state") === "still") {
-        $(this).attr({
-            "src": $(this).attr("data-animate"),
+//toggle between static and animate
+$(".gif-area").on("click", ".gif", function() {
+    var thisImage = $(this).children("img");
+    //if gif is static
+    if (thisImage.attr("data-state") === "still") {
+        //hide play button
+        thisImage.siblings(".icon-center").hide();
+        //thisImage.children(".icon-center").hide();
+        //animate gif
+        thisImage.attr({
+            "src": thisImage.attr("data-animate"),
             "data-state": "animate"
         });
+    //if gif is animate
     } else {
-        $(this).attr({
-            "src": $(this).attr("data-still"),
+        //show play button
+        thisImage.siblings(".icon-center").show();
+        //make static
+        thisImage.attr({
+            "src": thisImage.attr("data-still"),
             "data-state": "still"
         });
     }
