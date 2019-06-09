@@ -4,6 +4,10 @@ html, body {
 	background-color: #f4f4f4;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 h3 {
 	font-size: 27px;
 }
@@ -248,10 +252,12 @@ a {
 	.menu {
 		width: 100%;
 		height: auto;
+		position: relative;
 		padding: 26px 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		z-index: 100;
 	}
 	.toggle {
 		display: block;
@@ -278,7 +284,8 @@ a {
 	}
 	.gif-content {
 		width: 100%;
-		margin-top: 110px;
+		/* margin-top: 110px; */
+		float: none;
 	}
 	.search-bar {
 		margin: 0 40px;
