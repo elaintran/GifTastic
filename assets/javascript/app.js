@@ -46,7 +46,7 @@ function tagActive(element) {
     $(element).parent().append(rightArrow);
 }
 
-$(".submit").on("click", function(event) {
+$(".submit").on("click tap", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
