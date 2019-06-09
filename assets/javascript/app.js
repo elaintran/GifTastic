@@ -101,6 +101,29 @@ function ajaxCall(input) {
     })
 }
 
+function checkWidth() {
+    if ($(window).width() < 661) {
+        if (toggle === false) {
+            $(".tags").css({
+                "width": "250px",
+                "transition": ".5s"
+            });
+            $(".menu").css({
+                "margin-left": "250px",
+                "transition": "margin-left .5s"
+            });
+            toggle = true;
+        } else {
+            $(".tags").css("width", 0);
+            $(".menu").css("margin-left", 0);
+            toggle = false;
+        }
+    } else {
+        $(".menu").removeAttr("style");
+        $(".tags").removeAttr("style");
+    }
+}
+
 //display gifs with tags are clicked
 $(".tags").on("click", ".gif-button", gifButton);
 
@@ -130,14 +153,7 @@ $(".gif-area").on("click", ".gif", function() {
 })
 
 $(".toggle").on("click", function() {
-    if (toggle === false) {
-        $(".tags").show();
-        $(".tags").css("width", "250px");
-        $(".sidebar").css("margin-left", "250px");
-        toggle = true;
-    } else {
-        $(".tags").css("width", 0);
-        $(".sidebar").css("margin-left", 0);
-        toggle = false;
-    }
+    checkWidth();
+    //runs only when window is resized so need to call function first
+    $(window).resize(checkWidth);    
 })

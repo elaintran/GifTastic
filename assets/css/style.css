@@ -22,13 +22,12 @@ a {
 	width: 100%;
 }
 
-.sidebar {
+.menu {
 	position: fixed;
 	width: 200px;
 	background-color: #191919;
 	height: 100vh;
 	color: white;
-	transition: margin-left .5s;
 }
 
 .toggle {
@@ -48,7 +47,6 @@ a {
 	position: fixed;
 	overflow-y: auto;
 	z-index: 10;
-	transition: .5s;
 }
 
 .tags::-webkit-scrollbar {
@@ -63,10 +61,6 @@ a {
 .tags::-webkit-scrollbar-track {
 	background-color:#484848;
 	border-radius: 20px;
-}
-
-.tags p {
-	transition: 0.3s;
 }
 
 .gif-tags{
@@ -246,13 +240,18 @@ a {
 
 @media screen and (max-width: 660px) {
 	.sidebar {
+		background-color: #191919;
+		position: fixed;
+		height: 100vh;
+		z-index: 1000;
+	}
+	.menu {
 		width: 100%;
 		height: auto;
 		padding: 26px 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		z-index: 100;
 	}
 	.toggle {
 		display: block;
@@ -268,12 +267,14 @@ a {
 		margin: 0;
 	}
 	.tags {
-		display: none;
-		background-color: #191919;
-		margin-top: 0;
-		padding-top: 25px;
-		height: 100vh;
+		margin-top: 25px;
+		height: 90vh;
+		width: 0;
 		z-index: 100;
+		position: static;
+	}
+	.tags p {
+		transition: 0.3s;
 	}
 	.gif-content {
 		width: 100%;
