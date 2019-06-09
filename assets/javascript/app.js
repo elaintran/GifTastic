@@ -1,31 +1,47 @@
-var toggle = false;
+//global variables
+//parts of the queryurl
 var giphy = "https://api.giphy.com/v1/gifs/";
 var search = "search?q=";
 var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
+//side nav is collapsed
+var toggle = false;
 
+//array of preset gif tags
 var topics = ["fire emblem", "animal crossing", "paper mario", "pokemon", "splatoon", "bayonetta"];
 
+//display initial gif tags
 function tagDisplay() {
+    //clear tags section
     $(".tags").empty();
+    //loop through topics array
     for (var i = 0; i < topics.length; i++) {
+        //add div for tags
         var buttonContainer = $("<div>").addClass("gif-tags");
+        //add individual tags
         var tag = $("<p>").addClass("gif-button").attr("data-name", topics[i]).text(topics[i]);
+        //place tags into div
         buttonContainer.append(tag);
+        //place div on the side nav
         $(".tags").append(buttonContainer);
     }
 }
 tagDisplay();
 
+//display gifs on load
 function onLoadDisplay() {
+    //select the p element by data name from array
     var activeElement = $("p[data-name='" + topics[1] + "']");
+    //place selector on active gif tag
     tagActive(activeElement);
+    //call ajax to pull data and display gifs
     ajaxCall(topics[1]);
 }
 onLoadDisplay();
 
+//display gifs with tag is clicked on
 function gifButton() {
-    //get data-name for query url
+    //get data-name of tag clicked for query url
     var button = $(this).attr("data-name");
     //clear previous active classes when clicking on a new button
     tagClear();
@@ -35,17 +51,22 @@ function gifButton() {
     ajaxCall(button);
 }
 
+//remove active classes
 function tagClear() {
     $("p").removeClass("active");
     $(".selector").remove();
 }
 
+//add active classes
 function tagActive(element) {
     var rightArrow = $("<div>").addClass("selector");
+    //change text color from gray to white
     $(element).addClass("active");
+    //add pointer to active element
     $(element).parent().append(rightArrow);
 }
 
+//submit search form
 $(".submit").on("click touchstart", function(event) {
     //prevent page from refreshing
     event.preventDefault();
@@ -61,7 +82,7 @@ $(".submit").on("click touchstart", function(event) {
         if (topics.indexOf(term) === -1) {
             topics.push(term);
         }
-        //display new tag
+        //display new list of tags
         tagDisplay();
         //put active class on new tag
         tagActive(tagSelector);
@@ -73,6 +94,7 @@ $(".submit").on("click touchstart", function(event) {
 function ajaxCall(input) {
     //clear gifs
     $(".gif-area").empty();
+    //piece together queryurl
     var queryURL = giphy + search + input + limit + key;
     //making ajax call to get data
     $.ajax({
@@ -80,8 +102,11 @@ function ajaxCall(input) {
         method: "GET"
     }).then(function(response) {
         console.log(response);
+        //loop through data array
         for (var i = 0; i < response.data.length; i++) {
+            //create gif container
             var newGif = $("<div>").addClass("gif");
+            //place gif in image element and add animate and still states
             var gifImage = $("<img/>");
             gifImage.addClass("gif-image").attr({
                 "src": response.data[i].images.fixed_height_still.url,
@@ -89,13 +114,17 @@ function ajaxCall(input) {
                 "data-still": response.data[i].images.fixed_height_still.url,
                 "data-state": "still"
             });
+            //create rating element
             var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
+            //create play button in center of gif
             var iconCenter = $("<div>").addClass("icon-center");
             var playContainer = $("<div>").addClass("play-container");
             var playIcon = $("<div>").addClass("play-icon");
             playContainer.append(playIcon);
             iconCenter.append(playContainer);
+            //append elements to gif container
             newGif.append(gifImage).append(rating).append(iconCenter);
+            //append gif container to webpage
             $(".gif-area").append(newGif);
         }
     })
@@ -153,10 +182,13 @@ $(".toggle").on("click", function() {
         //allow for side nav to open on next click
         toggle = false;
     }
+    //add side nav transitions
     navTransition();
+    //active transitions upon window resize
     $(window).resize(navTransition); 
 })
 
+//adding and removing transitions inbetween collapsed and uncollapsed states of the side nav
 function navTransition() {
     //if side nav is open
     if (toggle === true) {
@@ -165,7 +197,7 @@ function navTransition() {
         //side nav uncollapsed state
         if (window.matchMedia("(min-width: 661px)").matches) {
             //remove transitions to prevent unnecessary animations between
-            //collapsed and uncollapsed navigation
+            //collapsed and uncollapsed state
             $("div").removeClass("transition");
             //change body to static
             $("body").removeAttr("style");
