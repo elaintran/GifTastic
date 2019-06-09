@@ -258,6 +258,7 @@ a {
 		align-items: center;
 		justify-content: center;
 		z-index: 100;
+		/* transition: .5s; */
 	}
 	.toggle {
 		display: block;
@@ -279,14 +280,15 @@ a {
 		z-index: 100;
 		width: 0;
 		position: static;
+		/* transition: .5s; */
 	}
 	.tags p {
 		transition: 0.3s;
 	}
 	.gif-content {
 		width: 100%;
-		/* margin-top: 110px; */
 		float: none;
+		/* transition: .5s; */
 	}
 	.search-bar {
 		margin: 0 40px;
@@ -300,13 +302,11 @@ a {
 	.nav-active {
 		width: 250px;
 	}
-	
 	.slide-left {
 		margin-left: 250px;
 	}
-	
 	.transition {
-		transition: .5s;
+		transition: .5s;	
 	}
 }
 

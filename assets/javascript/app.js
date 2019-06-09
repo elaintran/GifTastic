@@ -101,31 +101,6 @@ function ajaxCall(input) {
     })
 }
 
-function checkWidth() {
-    if ($(window).width() < 661) {
-        if (toggle === false) {
-            $(".tags").addClass("nav-active transition");
-            $(".menu").addClass("slide-left transition");
-            $(".gif-content").addClass("slide-left transition");
-            $("body").css("position", "fixed");
-            toggle = true;
-        } else {
-            clearClasses();
-            toggle = false;
-        }
-    } else {
-            clearClasses();
-    }
-}
-
-function clearClasses() {
-    $(".sidebar").removeClass("nav-active");
-    $(".tags").removeClass("nav-active");
-    $(".menu").removeClass("slide-left");
-    $(".gif-content").removeClass("slide-left");
-    $("body").removeAttr();
-}
-
 //display gifs with tags are clicked
 $(".tags").on("click", ".gif-button", gifButton);
 
@@ -154,13 +129,71 @@ $(".gif-area").on("click", ".gif", function() {
     }
 })
 
+//side nav toggle
 $(".toggle").on("click", function() {
-    checkWidth(); 
+    //side nav is not open
+    if (toggle === false) {
+        //add class to go from 0px to 250px width
+        $(".tags").addClass("nav-active transition");
+        $(".menu").addClass("slide-left transition");
+        //add class to push to right
+        $(".gif-content").addClass("slide-left transition");
+        //prevent body from scrolling when side nav is open
+        $("body").css("position", "fixed");
+        //allow for side nav to close when clicked next time
+        toggle = true;
+    //side nav is open
+    } else {
+        //set width back to 0
+        $(".tags").removeClass("nav-active");
+        //set margin back to 0
+        $("div").removeClass("slide-left");
+        //allow body to scroll again
+        $("body").removeAttr("style");
+        //allow for side nav to open on next click
+        toggle = false;
+    }
+    navTransition();
+    $(window).resize(navTransition); 
 })
 
+function navTransition() {
+    //if side nav is open
+    if (toggle === true) {
+        //if width is more than 661px and matches the media query
+        //using window.matchMedia because $(window).width() is not accurate
+        //side nav uncollapsed state
+        if (window.matchMedia("(min-width: 661px)").matches) {
+            //remove transitions to prevent unnecessary animations between
+            //collapsed and uncollapsed navigation
+            $("div").removeClass("transition");
+            //change body to static
+            $("body").removeAttr("style");
+        //side nav collapsed state
+        } else {
+            //return body to fixed to prevent scroll since side nav will be open
+            $("body").css("position", "fixed");
+        }
+    //if side nav is not open
+    } else {
+        //if width is less than 660px and matches the media query
+        //side nav collapsed state
+        if (window.matchMedia("(max-width: 660px)").matches) {
+            //add transitions to ease in to closed state
+            $(".tags").addClass("transition");
+            $(".menu").addClass("transition");
+            $(".gif-content").addClass("transition");
+            //change body to static
+            $("body").removeAttr("style");
+        //side nav uncollapsed state
+        } else {
+            //remove transition to prevent animation between states
+            $("div").removeClass("transition");
+        }
+    }
+}
 //BUGS TO FIX
 //need to create an error screen when no gifs are found
 //need to fix responsiveness on mobile - search bar & sidenav
 //need to fix width of sidebar on mobile - maybe make width a percent instead of px
 //need to fix mobile searches - searches end up refreshing the page
-//need to fix sidenav bug when sidebar is open and screen is resizing
