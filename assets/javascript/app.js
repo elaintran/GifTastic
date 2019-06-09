@@ -1,3 +1,4 @@
+var toggle = false;
 var giphy = "https://api.giphy.com/v1/gifs/";
 var search = "search?q=";
 var limit = "&limit=12";
@@ -128,8 +129,15 @@ $(".gif-area").on("click", ".gif", function() {
     }
 })
 
-//clear gifs
-$(".restart").on("click", function() {
-    $(".gif-area").empty();
-    tagClear();
+$(".toggle").on("click", function() {
+    if (toggle === false) {
+        $(".tags").show();
+        $(".tags").css("width", "250px");
+        $(".sidebar").css("margin-left", "250px");
+        toggle = true;
+    } else {
+        $(".tags").css("width", 0);
+        $(".sidebar").css("margin-left", 0);
+        toggle = false;
+    }
 })

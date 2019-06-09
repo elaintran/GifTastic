@@ -28,6 +28,11 @@ a {
 	background-color: #191919;
 	height: 100vh;
 	color: white;
+	transition: margin-left .5s;
+}
+
+.toggle {
+	display: none;
 }
 
 .title {
@@ -37,8 +42,13 @@ a {
 }
 
 .tags {
+    width: 200px;
 	height: 75vh;
-    overflow-y: auto;
+	margin-top: 15vh;
+	position: fixed;
+	overflow-y: auto;
+	z-index: 10;
+	transition: .5s;
 }
 
 .tags::-webkit-scrollbar {
@@ -48,6 +58,15 @@ a {
 .tags::-webkit-scrollbar-thumb {
   background-color: #797979;
   border-radius:20px;
+}
+
+.tags::-webkit-scrollbar-track {
+	background-color:#484848;
+	border-radius: 20px;
+}
+
+.tags p {
+	transition: 0.3s;
 }
 
 .gif-tags{
@@ -131,7 +150,8 @@ a {
 }
 
 .gif {
-    width: calc(33.333% - 40px);
+	width: calc(33.333% - 40px);
+	height: 250px;
     margin: 10px;
     padding: 10px;
     background-color: white;
@@ -199,11 +219,28 @@ a {
 	}
 }
 
+@media screen and (max-width: 922px) {
+	.gif {
+		height: 215px;
+	}
+}
+
+@media screen and (max-width: 840px) {
+	.gif {
+		height: 180px;
+	}
+}
+
 @media screen and (max-width: 785px) {
 	.gif {
 		width: calc(100% - 40px);
-		min-height: 250px;
-		max-height: 300px;
+		height: 300px;
+	}
+	.rating {
+		top: 17px;
+		right: 17px;
+		font-size: 13px;
+		padding: 6px 13px;
 	}
 }
 
@@ -211,24 +248,49 @@ a {
 	.sidebar {
 		width: 100%;
 		height: auto;
-		position: static;
 		padding: 26px 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.toggle {
+		display: block;
+		font-size: 23px;
+		left: 48px;
+		top: 30px;
+		position: absolute;
+	}
+	.toggle:hover {
+		cursor: pointer;
 	}
 	.title {
-	    margin: 0;
-		margin-left: 45px;
-		text-align: left;
+		margin: 0;
 	}
 	.tags {
 		display: none;
+		background-color: #191919;
+		margin-top: 0;
+		padding-top: 25px;
+		height: 100vh;
+		z-index: 100;
 	}
 	.gif-content {
 		width: 100%;
+		margin-top: 110px;
 	}
 	.search-bar {
 		margin: 0 40px;
 	}
 	.gif-area {
 		margin: 23px 35px 35px;
+	}
+	.gif {
+		height: 350px;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	.gif {
+		height: 280px;
 	}
 }
