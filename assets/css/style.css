@@ -47,7 +47,7 @@ a {
 .tags {
     width: 200px;
 	height: 75vh;
-	margin-top: 15vh;
+	margin-top: 85px;
 	position: fixed;
 	overflow-y: auto;
 	z-index: 10;
@@ -243,6 +243,9 @@ a {
 }
 
 @media screen and (max-width: 660px) {
+	p {
+		margin: 18px 0;
+	}
 	.sidebar {
 		background-color: #191919;
 		position: fixed;
@@ -258,7 +261,6 @@ a {
 		align-items: center;
 		justify-content: center;
 		z-index: 100;
-		/* transition: .5s; */
 	}
 	.toggle {
 		display: block;
@@ -280,15 +282,19 @@ a {
 		z-index: 100;
 		width: 0;
 		position: static;
-		/* transition: .5s; */
 	}
 	.tags p {
 		transition: 0.3s;
 	}
+	.selector {
+		top: 1;
+	}
+	.gif-button {
+		font-size: 17px;
+	}
 	.gif-content {
 		width: 100%;
 		float: none;
-		/* transition: .5s; */
 	}
 	.search-bar {
 		margin: 0 40px;
