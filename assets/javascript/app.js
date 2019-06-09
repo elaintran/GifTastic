@@ -70,6 +70,7 @@ function tagActive(element) {
 $(".submit").on("click touchstart", function(event) {
     //prevent page from refreshing
     event.preventDefault();
+    event.stopPropagation();
     //get input word
     term = $(".input-bar").val().toLowerCase();
     //clear input
@@ -226,6 +227,5 @@ function navTransition() {
 }
 //BUGS TO FIX
 //need to create an error screen when no gifs are found
-//need to fix responsiveness on mobile - search bar & sidenav
-//need to fix width of sidebar on mobile - maybe make width a percent instead of px
 //need to fix mobile searches - searches end up refreshing the page
+//maybe add a scroll to top button
