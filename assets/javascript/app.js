@@ -6,6 +6,7 @@ var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 //side nav is collapsed
 var toggle = false;
+var found = true;
 
 //array of preset gif tags
 var topics = ["fire emblem", "animal crossing", "paper mario", "pokemon", "splatoon", "bayonetta"];
@@ -72,29 +73,38 @@ $(".submit").on("click touchstart", function(event) {
     event.preventDefault();
     event.stopPropagation();
     //get input word
-    term = $(".input-bar").val().toLowerCase();
+    term = $(".input-bar").val().trim().toLowerCase();
     //clear input
     $(".input-bar").val("");
     //select new tag
     var tagSelector = "p[data-name='" + term + "']";
     //if input is not empty
     if (term !== "") {
-        //push search term into array if not in array already
-        if (topics.indexOf(term) === -1) {
-            topics.push(term);
-        }
-        //display new list of tags
-        tagDisplay();
-        //put active class on new tag
-        tagActive(tagSelector);
-        //display new gifs
+        //display new gifs first to see if results are found or not
         ajaxCall(term);
+        //if results are found
+        if (found === true) {
+            //push search term into array if not in array already
+            if (topics.indexOf(term) === -1) {
+                topics.push(term);
+            }
+            //display new list of tags
+            tagDisplay();
+            //put active class on new tag
+            tagActive(tagSelector);
+        //no results found
+        } else {
+            //clear current active class
+            tagClear();
+        }
     }
 })
 
 function ajaxCall(input) {
     //clear gifs
     $(".gif-area").empty();
+    //reset found variable
+    found = true;
     //piece together queryurl
     var queryURL = giphy + search + input + limit + key;
     //making ajax call to get data
@@ -128,6 +138,21 @@ function ajaxCall(input) {
             //append gif container to webpage
             $(".gif-area").append(newGif);
         }
+        //if returning zero search results
+        if (response.data.length === 0) {
+            //create error message
+            var errorMessage = $("<div>").addClass("error-message");
+            var errorTitle = $("<h2>").append("Uh-oh, there's nothing here.");
+            var errorSubtitle = $("<p>").append("It looks like you're trying to search for GIFs that aren't available. Please select one of the following tags on the side menu bar or start a new search.");
+            //back to homepage button
+            var goBack = $("<div>").addClass("go-back");
+            var homeLink = $("<a>").attr("href", "index.html").append("Go Back");
+            goBack.append(homeLink);
+            errorMessage.append(errorTitle).append(errorSubtitle).append(goBack);
+            $(".gif-area").append(errorMessage);
+            //not found
+            found = false;
+        }
     })
 }
 
@@ -141,7 +166,6 @@ $(".gif-area").on("click", ".gif", function() {
     if (thisImage.attr("data-state") === "still") {
         //hide play button
         thisImage.siblings(".icon-center").hide();
-        //thisImage.children(".icon-center").hide();
         //animate gif
         thisImage.attr({
             "src": thisImage.attr("data-animate"),
@@ -226,6 +250,5 @@ function navTransition() {
     }
 }
 //BUGS TO FIX
-//need to create an error screen when no gifs are found
 //need to fix mobile searches - searches end up refreshing the page
 //maybe add a scroll to top button
