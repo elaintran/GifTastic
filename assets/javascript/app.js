@@ -46,7 +46,7 @@ function tagActive(element) {
     $(element).parent().append(rightArrow);
 }
 
-$(".submit").on("click", function(event) {
+$(".submit").on("click touchstart", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
@@ -68,7 +68,6 @@ $(".submit").on("click", function(event) {
         //display new gifs
         ajaxCall(term);
     }
-    return false;
 })
 
 function ajaxCall(input) {
@@ -111,19 +110,20 @@ function checkWidth() {
             $("body").css("position", "fixed");
             toggle = true;
         } else {
-            $(".sidebar").removeClass("nav-active");
-            $(".tags").removeClass("nav-active");
-            $(".menu").removeClass("slide-left");
-            $(".gif-content").removeClass("slide-left");
-            $("body").css("position", "static");
+            clearClasses();
             toggle = false;
         }
     } else {
-        $(".tags").removeAttr("style");
-        $(".menu").removeAttr("style");
-        $(".gif-content").removeAttr("style");
-        $("body").removeAttr("style");
+            clearClasses();
     }
+}
+
+function clearClasses() {
+    $(".sidebar").removeClass("nav-active");
+    $(".tags").removeClass("nav-active");
+    $(".menu").removeClass("slide-left");
+    $(".gif-content").removeClass("slide-left");
+    $("body").removeAttr();
 }
 
 //display gifs with tags are clicked
@@ -155,9 +155,7 @@ $(".gif-area").on("click", ".gif", function() {
 })
 
 $(".toggle").on("click", function() {
-    checkWidth();
-    //runs only when window is resized so need to call function first
-    $(window).resize(checkWidth);    
+    checkWidth(); 
 })
 
 //BUGS TO FIX
@@ -165,3 +163,4 @@ $(".toggle").on("click", function() {
 //need to fix responsiveness on mobile - search bar & sidenav
 //need to fix width of sidebar on mobile - maybe make width a percent instead of px
 //need to fix mobile searches - searches end up refreshing the page
+//need to fix sidenav bug when sidebar is open and screen is resizing
