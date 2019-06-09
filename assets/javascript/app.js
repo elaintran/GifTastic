@@ -68,7 +68,7 @@ function tagActive(element) {
 }
 
 //submit search form
-$(".submit").on("submit", function(event) {
+$(".search-bar").on("submit", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
