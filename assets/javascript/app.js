@@ -68,10 +68,9 @@ function tagActive(element) {
 }
 
 //submit search form
-$(".submit").on("click touchstart", function(event) {
+$(".submit").on("submit", function(event) {
     //prevent page from refreshing
     event.preventDefault();
-    event.stopPropagation();
     //get input word
     term = $(".input-bar").val().trim().toLowerCase();
     //clear input
@@ -98,6 +97,7 @@ $(".submit").on("click touchstart", function(event) {
             tagClear();
         }
     }
+    return false;
 })
 
 function ajaxCall(input) {
