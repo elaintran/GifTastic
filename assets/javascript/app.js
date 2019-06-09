@@ -114,17 +114,15 @@ function checkWidth() {
             });
             $(".gif-content").css({
                 "margin-left": "250px",
-                "transition": "margin-left .5s",
-                "position": "fixed"    
+                "transition": "margin-left .5s",    
             })
+            $("body").css("position": "fixed");
             toggle = true;
         } else {
             $(".tags").css("width", 0);
             $(".menu").css("margin-left", 0);
-            $(".gif-content").css({
-                "margin-left": 0,
-                "position": "static"
-            });
+            $(".gif-content").css("margin-left", 0);
+            $("body").css("position", "static");
             toggle = false;
         }
     } else {
