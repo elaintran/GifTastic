@@ -104,24 +104,16 @@ function ajaxCall(input) {
 function checkWidth() {
     if ($(window).width() < 661) {
         if (toggle === false) {
-            $(".tags").css({
-                "width": "250px",
-                "transition": ".5s"
-            });
-            $(".menu").css({
-                "margin-left": "250px",
-                "transition": "margin-left .5s"
-            });
-            $(".gif-content").css({
-                "margin-left": "250px",
-                "transition": "margin-left .5s",    
-            })
-            $("body").css("position": "fixed");
+            $(".tags").addClass("nav-active transition");
+            $(".menu").addClass("slide-left transition");
+            $(".gif-content").addClass("slide-left transition");
+            $("body").css("position", "fixed");
             toggle = true;
         } else {
-            $(".tags").css("width", 0);
-            $(".menu").css("margin-left", 0);
-            $(".gif-content").css("margin-left", 0);
+            $(".sidebar").removeClass("nav-active");
+            $(".tags").removeClass("nav-active");
+            $(".menu").removeClass("slide-left");
+            $(".gif-content").removeClass("slide-left");
             $("body").css("position", "static");
             toggle = false;
         }
@@ -129,6 +121,7 @@ function checkWidth() {
         $(".tags").removeAttr("style");
         $(".menu").removeAttr("style");
         $(".gif-content").removeAttr("style");
+        $("body").removeAttr("style");
     }
 }
 

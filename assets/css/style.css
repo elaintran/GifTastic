@@ -273,10 +273,11 @@ a {
 		margin: 0;
 	}
 	.tags {
+		display: block;
 		margin-top: 25px;
 		height: 90vh;
-		width: 0;
 		z-index: 100;
+		width: 0;
 		position: static;
 	}
 	.tags p {
@@ -295,6 +296,17 @@ a {
 	}
 	.gif {
 		height: 350px;
+	}
+	.nav-active {
+		width: 250px;
+	}
+	
+	.slide-left {
+		margin-left: 250px;
+	}
+	
+	.transition {
+		transition: .5s;
 	}
 }
 
