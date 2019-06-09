@@ -46,7 +46,7 @@ function tagActive(element) {
     $(element).parent().append(rightArrow);
 }
 
-$(".submit").on("click tap", function(event) {
+$(".submit").on("click", function(event) {
     //prevent page from refreshing
     event.preventDefault();
     //get input word
@@ -68,6 +68,7 @@ $(".submit").on("click tap", function(event) {
         //display new gifs
         ajaxCall(term);
     }
+    return false;
 })
 
 function ajaxCall(input) {

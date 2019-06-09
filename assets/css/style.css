@@ -310,8 +310,47 @@ a {
 	}
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 500px) {
+	.toggle {
+		left: 8%;
+	}
+	.search-bar {
+		margin: 0 6%;
+	}
+	.gif-area {
+		margin: 23px 4% 35px;
+	}
+}
+
+@media screen and (max-width: 450px) {
 	.gif {
-		height: 280px;
+		height: 300px;
+	}
+}
+
+@media screen and (max-width: 422px) {
+	.input-bar {
+		width: 86%;
+	}
+	.gif {
+		height: 270px;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.gif {
+		height: 250px;
+	}
+}
+
+@media screen and (max-width: 343px) {
+	.search-container {
+		padding: 10px 20px;
+	}
+	.search-container i {
+		margin-right: 9px;
+	}
+	.input-bar {
+		width: 83%;
 	}
 }
