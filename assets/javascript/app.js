@@ -158,3 +158,9 @@ $(".toggle").on("click", function() {
     //runs only when window is resized so need to call function first
     $(window).resize(checkWidth);    
 })
+
+//BUGS TO FIX
+//need to create an error screen when no gifs are found
+//need to fix responsiveness on mobile - search bar & sidenav
+//need to fix width of sidebar on mobile - maybe make width a percent instead of px
+//need to fix mobile searches - searches end up refreshing the page
