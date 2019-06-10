@@ -41,7 +41,7 @@ $(document).ready(function() {
     }
     onLoadDisplay();
 
-    //display gifs with tag is clicked on
+    //display gifs when tag is clicked on
     function gifButton() {
         //get data-name of tag clicked for query url
         var button = $(this).attr("data-name");
@@ -53,13 +53,13 @@ $(document).ready(function() {
         ajaxCall(button);
     }
 
-    //remove active classes
+    //remove active classes on buttons
     function tagClear() {
         $("p").removeClass("active");
         $(".selector").remove();
     }
 
-    //add active classes
+    //add active classes on buttons
     function tagActive(element) {
         var rightArrow = $("<div>").addClass("selector");
         //change text color from gray to white
@@ -69,6 +69,7 @@ $(document).ready(function() {
     }
 
     //submit listener on form instead of input for it to work on mobile
+    //search for gifs once form is submitted
     $(".search-bar").on("submit", function(event) {
         //prevent page from refreshing
         event.preventDefault();
@@ -101,10 +102,11 @@ $(document).ready(function() {
                 }
             });
         }
+        //prevent page from refreshing on submit
         return false;
     })
 
-    //making ajax call to get data
+    //making ajax call to get data to get gifs
     function ajaxCall(input) {
         //clear gifs
         $(".gif-area").empty();
@@ -114,6 +116,7 @@ $(document).ready(function() {
         return $.ajax({
             url: queryURL,
             method: "GET"
+        //once data has been retrieved, run function
         }).then(function(response) {
             console.log(response);
             //if there is more than one result
@@ -164,11 +167,14 @@ $(document).ready(function() {
         })
     }
 
-    //display gifs with tags are clicked
+    //display gifs when tags are clicked
     $(".tags").on("click", ".gif-button", gifButton);
 
-    //toggle between static and animate
+    //toggle between static and animate gifs
+    //click handler on the gif div holding the image instead of image because placement of the
+    //play button is covering the whole image, so clicking the image won't work
     $(".gif-area").on("click", ".gif", function() {
+        //current image clicked
         var thisImage = $(this).children("img");
         //if gif is static
         if (thisImage.attr("data-state") === "still") {
@@ -191,7 +197,7 @@ $(document).ready(function() {
         }
     })
 
-    //side nav toggle
+    //side nav toggle on mobile
     $(".toggle").on("click", function() {
         //side nav is not open
         if (toggle === false) {
