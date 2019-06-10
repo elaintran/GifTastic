@@ -6,7 +6,7 @@ var limit = "&limit=12";
 var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 //side nav is collapsed
 var toggle = false;
-var found = true;
+var found = false;
 
 //array of preset gif tags
 var topics = ["fire emblem", "animal crossing", "paper mario", "pokemon", "splatoon", "bayonetta"];
@@ -67,7 +67,7 @@ function tagActive(element) {
     $(element).parent().append(rightArrow);
 }
 
-//submit search form
+//submit listener on form instead of input for it to work on mobile
 $(".search-bar").on("submit", function(event) {
     //prevent page from refreshing
     event.preventDefault();
@@ -80,22 +80,25 @@ $(".search-bar").on("submit", function(event) {
     //if input is not empty
     if (term !== "") {
         //display new gifs first to see if results are found or not
-        ajaxCall(term);
-        //if results are found
-        if (found === true) {
-            //push search term into array if not in array already
-            if (topics.indexOf(term) === -1) {
-                topics.push(term);
+        //wait for ajax to finish loading to get boolean from found variable
+        //if no promise is made, the wrong boolean will be called
+        ajaxCall(term).then(function() {
+            //if results are found
+            if (found === true) {
+                //push search term into array if not in array already
+                if (topics.indexOf(term) === -1) {
+                    topics.push(term);
+                }
+                //display new list of tags
+                tagDisplay();
+                //put active class on new tag
+                tagActive(tagSelector);
+            //no results found
+            } else {
+                //clear current active class
+                tagClear();
             }
-            //display new list of tags
-            tagDisplay();
-            //put active class on new tag
-            tagActive(tagSelector);
-        //no results found
-        } else {
-            //clear current active class
-            tagClear();
-        }
+        });
     }
     return false;
 })
@@ -104,53 +107,57 @@ function ajaxCall(input) {
     //clear gifs
     $(".gif-area").empty();
     //reset found variable
-    found = true;
     //piece together queryurl
     var queryURL = giphy + search + input + limit + key;
     //making ajax call to get data
-    $.ajax({
+    //return ajax to call the boolean from the found variable
+    return $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         console.log(response);
         //loop through data array
-        for (var i = 0; i < response.data.length; i++) {
-            //create gif container
-            var newGif = $("<div>").addClass("gif");
-            //place gif in image element and add animate and still states
-            var gifImage = $("<img/>");
-            gifImage.addClass("gif-image").attr({
-                "src": response.data[i].images.fixed_height_still.url,
-                "data-animate": response.data[i].images.fixed_height.url,
-                "data-still": response.data[i].images.fixed_height_still.url,
-                "data-state": "still"
-            });
-            //create rating element
-            var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
-            //create play button in center of gif
-            var iconCenter = $("<div>").addClass("icon-center");
-            var playContainer = $("<div>").addClass("play-container");
-            var playIcon = $("<div>").addClass("play-icon");
-            playContainer.append(playIcon);
-            iconCenter.append(playContainer);
-            //append elements to gif container
-            newGif.append(gifImage).append(rating).append(iconCenter);
-            //append gif container to webpage
-            $(".gif-area").append(newGif);
+        if (response.data.length !== 0) {
+            for (var i = 0; i < response.data.length; i++) {
+                //create gif container
+                var newGif = $("<div>").addClass("gif");
+                //place gif in image element and add animate and still states
+                var gifImage = $("<img/>");
+                gifImage.addClass("gif-image").attr({
+                    "src": response.data[i].images.fixed_height_still.url,
+                    "data-animate": response.data[i].images.fixed_height.url,
+                    "data-still": response.data[i].images.fixed_height_still.url,
+                    "data-state": "still"
+                });
+                //create rating element
+                var rating = $("<div>").addClass("rating").text("Rated " + response.data[i].rating);
+                //create play button in center of gif
+                var iconCenter = $("<div>").addClass("icon-center");
+                var playContainer = $("<div>").addClass("play-container");
+                var playIcon = $("<div>").addClass("play-icon");
+                playContainer.append(playIcon);
+                iconCenter.append(playContainer);
+                //append elements to gif container
+                newGif.append(gifImage).append(rating).append(iconCenter);
+                //append gif container to webpage
+                $(".gif-area").append(newGif);
+            }
+            //result found
+            found = true;
         }
         //if returning zero search results
-        if (response.data.length === 0) {
+        else {
             //create error message
             var errorMessage = $("<div>").addClass("error-message");
-            var errorTitle = $("<h2>").append("Uh-oh, there's nothing here.");
-            var errorSubtitle = $("<p>").append("It looks like you're trying to search for GIFs that aren't available. Please select one of the following tags on the side menu bar or start a new search.");
+            var errorTitle = $("<h1>").append("Uh-oh, there's nothing here.");
+            var errorSubtitle = $("<p>").append("We're very sorry for the inconvenience. It looks like you're trying to search for GIFs that aren't available. Please select one of the following tags on the side menu bar or start a new search instead.");
             //back to homepage button
             var goBack = $("<div>").addClass("go-back");
             var homeLink = $("<a>").attr("href", "index.html").append("Go Back");
             goBack.append(homeLink);
             errorMessage.append(errorTitle).append(errorSubtitle).append(goBack);
             $(".gif-area").append(errorMessage);
-            //not found
+            //result not found
             found = false;
         }
     })
@@ -249,6 +256,3 @@ function navTransition() {
         }
     }
 }
-//BUGS TO FIX
-//need to fix mobile searches - searches end up refreshing the page
-//maybe add a scroll to top button

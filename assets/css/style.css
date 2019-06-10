@@ -131,6 +131,7 @@ a {
     letter-spacing: 0.2px;
 	width: 95%;
 	color: #191919;
+	font-size: 14px;
 }
 
 .input-bar:focus, .input-bar:active {
@@ -206,8 +207,8 @@ a {
     margin-top: 20px;
 }
 
-.error-message h2 {
-	font-size: 40px;
+.error-message h1 {
+	font-size: 50px;
     font-weight: 600;
 }
 
@@ -215,7 +216,7 @@ a {
 	margin-top: 15px;
 	line-height: 1.3;
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 16px;
 }
 
 .go-back {
@@ -237,6 +238,12 @@ a {
 	}
 }
 
+@media screen and (max-width: 979px) {
+	.error-message h1 {
+		font-size: 43px;
+	}
+}
+
 @media screen and (max-width: 957px) {
 	.search-container {
 		width: 100%;
@@ -253,9 +260,25 @@ a {
 	}
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 911px) {
+	.error-message h1 {
+		font-size: 40px;
+	}
+	.error-message p {
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width: 843px) {
 	.gif {
 		height: 180px;
+	}
+	.error-message h1 {
+		font-size: 35px;
+	}
+	.error-message p {
+		margin-top: 13px;
+		font-size: 14px;
 	}
 }
 
@@ -269,6 +292,9 @@ a {
 		right: 17px;
 		font-size: 13px;
 		padding: 6px 13px;
+	}
+	.error-message h1 {
+		font-size: 33px;
 	}
 }
 
