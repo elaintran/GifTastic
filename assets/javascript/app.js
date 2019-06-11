@@ -8,59 +8,59 @@ var key = "&api_key=olNnoonalFjTJ2xzZ9ovXi3RJQTHayOW";
 var toggle = false;
 var found = false;
 
-//array of preset gif tags
+//array of preset gif tabs
 var topics = ["fire emblem", "animal crossing", "paper mario", "pokemon", "splatoon", "bayonetta"];
 
 $(document).ready(function() {
-    //display initial gif tags
-    function tagDisplay() {
-        //clear tags section
-        $(".tags").empty();
+    //display initial gif tabs
+    function tabDisplay() {
+        //clear tabs section
+        $(".tabs").empty();
         //loop through topics array
         for (var i = 0; i < topics.length; i++) {
-            //add div for tags
-            var buttonContainer = $("<div>").addClass("gif-tags");
-            //add individual tags
-            var tag = $("<p>").addClass("gif-button").attr("data-name", topics[i]).text(topics[i]);
-            //place tags into div
-            buttonContainer.append(tag);
+            //add div for tabs
+            var buttonContainer = $("<div>").addClass("gif-tabs");
+            //add individual tabs
+            var tab = $("<p>").addClass("gif-button").attr("data-name", topics[i]).text(topics[i]);
+            //place tabs into div
+            buttonContainer.append(tab);
             //place div on the side nav
-            $(".tags").append(buttonContainer);
+            $(".tabs").append(buttonContainer);
         }
     }
-    tagDisplay();
+    tabDisplay();
 
     //display gifs on load so screen won't be empty
     function onLoadDisplay() {
         //select the p element by data name from array
         var activeElement = $("p[data-name='" + topics[1] + "']");
-        //place selector on active gif tag
-        tagActive(activeElement);
-        //call ajax to pull data and display gifs
+        //place selector on active gif tab
+        tabActive(activeElement);
+        //ajax call to pull data and display gifs
         ajaxCall(topics[1]);
     }
     onLoadDisplay();
 
-    //display gifs when tag is clicked on
-    function gifButton() {
-        //get data-name of tag clicked for query url
+    //display gifs when tab is clicked on
+    function gifTab() {
+        //get data-name of tab clicked for query url
         var button = $(this).attr("data-name");
         //clear previous active classes when clicking on a new button
-        tagClear();
+        tabClear();
         //add new active classes
-        tagActive(this);
-        //call ajax for when button is clicked
+        tabActive(this);
+        //ajax call for when button is clicked
         ajaxCall(button);
     }
 
     //remove active classes on buttons
-    function tagClear() {
+    function tabClear() {
         $("p").removeClass("active");
         $(".selector").remove();
     }
 
     //add active classes on buttons
-    function tagActive(element) {
+    function tabActive(element) {
         var rightArrow = $("<div>").addClass("selector");
         //change text color from gray to white
         $(element).addClass("active");
@@ -77,8 +77,8 @@ $(document).ready(function() {
         term = $(".input-bar").val().trim().toLowerCase();
         //clear input
         $(".input-bar").val("");
-        //select new tag
-        var tagSelector = "p[data-name='" + term + "']";
+        //select new tab
+        var tabSelector = "p[data-name='" + term + "']";
         //if input is not empty
         if (term !== "") {
             //display new gifs first to see if results are found or not
@@ -91,14 +91,14 @@ $(document).ready(function() {
                     if (topics.indexOf(term) === -1) {
                         topics.push(term);
                     }
-                    //display new list of tags
-                    tagDisplay();
-                    //put active class on new tag
-                    tagActive(tagSelector);
+                    //display new list of tabs
+                    tabDisplay();
+                    //put active class on new tab
+                    tabActive(tabSelector);
                 //no results found
                 } else {
                     //clear current active class so no classes are active when error page is shown
-                    tagClear();
+                    tabClear();
                 }
             });
         }
@@ -154,7 +154,7 @@ $(document).ready(function() {
                 //create error message
                 var errorMessage = $("<div>").addClass("error-message");
                 var errorTitle = $("<h1>").append("Uh-oh, there's nothing here.");
-                var errorSubtitle = $("<p>").append("We're very sorry for the inconvenience. It looks like you're trying to search for GIFs that aren't available. Please select one of the following tags on the side menu bar or start a new search instead.");
+                var errorSubtitle = $("<p>").append("We're very sorry for the inconvenience. It looks like you're trying to search for GIFs that aren't available. Please select one of the following tabs on the side menu bar or start a new search instead.");
                 //back to homepage button
                 var goBack = $("<div>").addClass("go-back");
                 var homeLink = $("<a>").attr("href", "index.html").append("Go Back");
@@ -167,8 +167,8 @@ $(document).ready(function() {
         })
     }
 
-    //display gifs when tags are clicked
-    $(".tags").on("click", ".gif-button", gifButton);
+    //display gifs when tabs are clicked
+    $(".tabs").on("click", ".gif-button", gifTab);
 
     //toggle between static and animate gifs
     //click handler on the gif div holding the image instead of image because placement of the
@@ -202,7 +202,7 @@ $(document).ready(function() {
         //side nav is not open
         if (toggle === false) {
             //add class to go from 0px to 250px width
-            $(".tags").addClass("nav-active transition");
+            $(".tabs").addClass("nav-active transition");
             $(".menu").addClass("slide-left transition");
             //add class to push to right
             $(".gif-content").addClass("slide-left transition");
@@ -213,7 +213,7 @@ $(document).ready(function() {
         //side nav is open
         } else {
             //set width back to 0
-            $(".tags").removeClass("nav-active");
+            $(".tabs").removeClass("nav-active");
             //set margin back to 0
             $("div").removeClass("slide-left");
             //allow body to scroll again
@@ -251,7 +251,7 @@ $(document).ready(function() {
             //side nav collapsed state
             if (window.matchMedia("(max-width: 660px)").matches) {
                 //add transitions to ease in to closed state
-                $(".tags").addClass("transition");
+                $(".tabs").addClass("transition");
                 $(".menu").addClass("transition");
                 $(".gif-content").addClass("transition");
                 //change body to static
